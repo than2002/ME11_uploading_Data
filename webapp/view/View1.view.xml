@@ -1,0 +1,237 @@
+<mvc:View
+    controllerName="me11uploadingdata.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:t="sap.ui.table">
+
+    <Page title="ME11 Uploading Data">
+        <content>
+            <VBox class="sapUiSmallMargin" width="100%">
+
+                <!-- Top Actions -->
+                <Toolbar class="sapUiSmallMarginBottom">
+                    <Title text="ME11 Excel Upload Preview" level="H4" />
+                    <ToolbarSpacer />
+
+                    <u:FileUploader
+                        id="fileUploader"
+                        width="240px"
+                        fileType="xlsx,xls"
+                        buttonText="Select Excel"
+                        change="onFileChange" />
+
+                    <Button
+                        text="Read Excel"
+                        type="Emphasized"
+                        press="onReadExcel"
+                        class="sapUiTinyMarginBegin" />
+
+                    <!-- <Button
+                        text="Send Selected"
+                        type="Accept"
+                        press="onSendSelectedToBackend"
+                        class="sapUiTinyMarginBegin" /> -->
+
+                    <Button
+                        text="Upload Data"
+                        type="Accept"
+                        press="onSendToBackend"
+                        class="sapUiTinyMarginBegin" />
+                    
+                    <Button
+                        text="Download Excel"
+                        icon="sap-icon://download"
+                        press="onDownloadExcel"/>
+    
+
+                    <Button
+                        text="Clear"
+                        press="onClear"
+                        class="sapUiTinyMarginBegin" />
+                </Toolbar>
+
+                <!-- Summary + Search -->
+                <Toolbar class="sapUiSmallMarginBottom">
+                    <Text id="txtRows" text="Rows: 0" class="sapUiTinyMarginEnd" />
+                    <Text id="txtValid" text="Valid: 0" class="sapUiTinyMarginEnd" />
+                    <Text id="txtInvalid" text="Invalid: 0" class="sapUiTinyMarginEnd" />
+
+                    <ToolbarSpacer />
+
+                    <SearchField
+                        id="searchField"
+                        width="320px"
+                            
+                        placeholder="Search ( Supplier / Material / Plant / Status / Message )"
+                        liveChange="onSearch" />
+                </Toolbar>
+
+                <!-- Preview Table -->
+                <t:Table
+                    id="previewTable"
+                    rows="{excel>/rows}"
+                    visibleRowCount="12"
+                    alternateRowColors="true"
+                    selectionMode="None"
+                    enableColumnReordering="true"
+                    width="100%">
+
+                    <t:columns>
+
+                        <t:Column width="5rem">
+                            <Label text="Row" />
+                            <t:template>
+                                <Text text="{excel>RowNo}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="LIFNR" />
+                            <t:template>
+                                <Text text="{excel>Lifnr}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="12rem">
+                            <Label text="MATNR" />
+                            <t:template>
+                                <Text text="{excel>Matnr}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="EKORG" />
+                            <t:template>
+                                <Text text="{excel>Ekorg}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="WERKS" />
+                            <t:template>
+                                <Text text="{excel>Werks}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="NORMB" />
+                            <t:template>
+                                <Text text="{excel>Normb}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="MEINS" />
+                            <t:template>
+                                <Text text="{excel>Meins}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="APLFZ" />
+                            <t:template>
+                                <Text text="{excel>Aplfz}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="NORBM" />
+                            <t:template>
+                                <Text text="{excel>Norbm}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="MWSKZ" />
+                            <t:template>
+                                <Text text="{excel>Mwskz}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="NETPR" />
+                            <t:template>
+                                <Text text="{excel>Netpr}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="PEINH" />
+                            <t:template>
+                                <Text text="{excel>Peinh}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem">
+                            <Label text="BPRME" />
+                            <t:template>
+                                <Text text="{excel>Bprme}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="DATAB" />
+                            <t:template>
+                                <Text text="{excel>Datab}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="DATBI" />
+                            <t:template>
+                                <Text text="{excel>Datbi}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="KSCHL_02" />
+                            <t:template>
+                                <Text text="{excel>Kschl_02}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="KBETR_02" />
+                            <t:template>
+                                <Text text="{excel>Kbetr_02}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="KSCHL_03" />
+                            <t:template>
+                                <Text text="{excel>Kschl_03}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="KBETR_03" />
+                            <t:template>
+                                <Text text="{excel>Kbetr_03}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem">
+                            <Label text="Status" />
+                            <t:template>
+                                <ObjectStatus
+                                    text="{excel>StatusText}"
+                                    state="{excel>StatusState}" />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="20rem">
+                            <Label text="Validation Message" />
+                            <t:template>
+                                <Text text="{excel>ValidationMessage}" wrapping="true" />
+                            </t:template>
+                        </t:Column>
+
+                    </t:columns>
+                </t:Table>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
