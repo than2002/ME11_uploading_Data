@@ -19,11 +19,9 @@ sap.ui.define([
 
     return Controller.extend("me11uploadingdata.controller.View1", {
 
-        /*====================================================*/
-        /* CONSTANTS                                          */
-        /* Why: Hardcoded values remove                       */
-        /* Benefit: Easy maintenance                          */
-        /*====================================================*/
+        
+        //CONSTANTS                                        
+        
         CONST: {
             GROUP_ID: "upload",
             ENTITY_SET: "/UploadHeaderSet",
@@ -34,9 +32,6 @@ sap.ui.define([
             STATUS_ERROR: "Error"
         },
 
-        /*====================================================*/
-        /* INIT                                               */
-        /*====================================================*/
         onInit: function () {
             this._file = null;
 
@@ -57,33 +52,20 @@ sap.ui.define([
             }
         },
 
-        /*====================================================*/
-        /* LOGIN USER                                         */
-        /* Why: Centralized user fetch                        */
-        /*====================================================*/
+      
+        // LOGIN USER    
+        
         _getLoggedInUser: function () {
             try {
-                if (sap.ushell && sap.ushell.Container) {
-                    var oUser = sap.ushell.Container.getUser();
-
-                    if (oUser) {
-                        if (oUser.getId()) {
-                            return oUser.getId();
-                        }
-
-                        if (oUser.getEmail()) {
-                            return oUser.getEmail().split("@")[0];
-                        }
-                    }
-                }
-            } catch (e) { }
-
-            return "";
+                return sap.ushell.Container.getUser()
+                .getEmail()
+                .split("@")[0].toUpperCase();
+            } catch (e) {
+                return "";
+            }
         },
-
-        /*====================================================*/
-        /* XLSX LIB                                           */
-        /*====================================================*/
+         // XLSX LIB                                        
+        
         _loadXLSXLibrary: function () {
             if (typeof XLSX !== "undefined") {
                 return;
@@ -101,9 +83,9 @@ sap.ui.define([
             document.head.appendChild(script);
         },
 
-        /*====================================================*/
-        /* FILE SELECT                                        */
-        /*====================================================*/
+        
+        // FILE SELECT                                    
+        
         onFileChange: function (oEvent) {
             var aFiles = oEvent.getParameter("files");
 
@@ -113,9 +95,9 @@ sap.ui.define([
             }
         },
 
-        /*====================================================*/
-        /* READ EXCEL                                         */
-        /*====================================================*/
+        
+        //READ EXCEL                                        
+       
         onReadExcel: function () {
             var that = this;
 
@@ -235,9 +217,9 @@ sap.ui.define([
             };
         },
 
-        /*====================================================*/
-        /* SEARCH                                             */
-        /*====================================================*/
+       
+        // SEARCH                                            
+      
         onSearch: function (oEvent) {
             var sValue = oEvent.getParameter("newValue");
             var oBinding = this.byId("previewTable").getBinding("rows");
@@ -263,9 +245,9 @@ sap.ui.define([
             }));
         },
 
-        /*====================================================*/
-        /* SEND BACKEND                                       */
-        /*====================================================*/
+        
+        // SEND BACKEND                                      
+        
         onSendToBackend: function () {
             this._revalidateAllRows();
 
@@ -285,6 +267,7 @@ sap.ui.define([
             var that = this;
             var oModel = this.getView().getModel();
             var sUser = this._getLoggedInUser();
+           
 
             if (!sUser) {
                 MessageBox.error("Unable to fetch login user.");
@@ -310,7 +293,7 @@ sap.ui.define([
                         );
                     },
 
-                    error: function () {
+                    error: function (oErr) {
                         BusyIndicator.hide();
                         MessageBox.error(
                             "Upload failed. Please contact support."
@@ -325,7 +308,9 @@ sap.ui.define([
         },
 
         _buildPayload: function (aRows, sUser) {
+          
             var that = this;
+           
 
             return {
                 UploadId: sUser,
@@ -391,9 +376,9 @@ sap.ui.define([
             this._updateCounts();
         },
 
-        /*====================================================*/
-        /* VALIDATION                                         */
-        /*====================================================*/
+        
+        // VALIDATION                                     
+        
         _validateRow: function (row) {
             var aErrors = [];
 
@@ -452,9 +437,9 @@ sap.ui.define([
             }
         },
 
-        /*====================================================*/
-        /* DOWNLOAD                                           */
-        /*====================================================*/
+       
+        // DOWNLOAD                                           
+      
         onDownloadExcel: function () {
             var aRows = this._getRows();
 
@@ -481,9 +466,9 @@ sap.ui.define([
             XLSX.writeFile(wb, "ME11_Upload_Result.xlsx");
         },
 
-        /*====================================================*/
-        /* CLEAR                                              */
-        /*====================================================*/
+        
+        // CLEAR                                              
+        
         onClear: function () {
             this._clearRows();
 
@@ -499,9 +484,9 @@ sap.ui.define([
             this._setRows([]);
         },
 
-        /*====================================================*/
-        /* MODEL HELPERS                                       */
-        /*====================================================*/
+        
+        // MODEL HELPERS                                       
+        
         _getRows: function () {
             return this.getView()
                 .getModel("excel")
@@ -539,9 +524,9 @@ sap.ui.define([
                 );
         },
 
-        /*====================================================*/
-        /* CONVERTERS                                          */
-        /*====================================================*/
+        
+        // CONVERTERS                                          
+        
         _toString: function (v) {
             return v ? String(v).trim() : "";
         },

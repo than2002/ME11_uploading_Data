@@ -11,7 +11,7 @@
 
                 <!-- Top Actions -->
                 <Toolbar class="sapUiSmallMarginBottom">
-                    <Title text="ME11 Excel Upload Preview" level="H4" />
+                    <Title text="ME11 Excel Upload " level="H4" />
                     <ToolbarSpacer />
 
                     <u:FileUploader
