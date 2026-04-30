@@ -33,6 +33,7 @@ sap.ui.define([
         },
 
         onInit: function () {
+            
             this._file = null;
 
             this.getView().setModel(new JSONModel({
@@ -75,7 +76,7 @@ sap.ui.define([
             script.src = sap.ui.require.toUrl(
                 "me11uploadingdata/libs/xlsx.full.min.js"
             );
-
+                                                  
             script.onerror = function () {
                 MessageBox.error("Unable to load Excel library.");
             };
